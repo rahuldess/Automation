@@ -1,5 +1,4 @@
 require 'watir'
-require 'webdrivers'
 require 'twilio-ruby'
 
 puts "--------------------"
