@@ -20,7 +20,8 @@ begin
   browser.input(name: 'commit').click
 
   # Click on Continue button
-  browser.link(href: '/en-ca/niv/schedule/31865037/continue_actions').click
+  #browser.link(href: '/en-ca/niv/schedule/31865037/continue_actions').click
+  browser.link(xpath: '//*[@id="main"]/div[2]/div[3]/div[1]/div/div/div[1]/div[2]/ul/li/a').click
 
   # Click on 'Reschedule Appointment' 
   browser.execute_script('$("#forms > ul > li:nth-child(4) > div").css("display", "block")')
