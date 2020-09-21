@@ -24,7 +24,7 @@ begin
 
   # Click on 'Reschedule Appointment' 
   browser.execute_script('$("#forms > ul > li:nth-child(4) > div").css("display", "block")')
-  browser.link(href: '/en-ca/niv/shedule/31865037/appointment').click
+  browser.link(href: '/en-ca/niv/schedule/31865037/appointment').click
 
   # Click on 'Date of Appointment field' 
   browser.input(id: "appointments_consulate_appointment_date").click
