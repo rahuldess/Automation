@@ -1,18 +1,12 @@
-puts "-1-------------------"
 require 'watir'
-puts "-2-------------------"
 require 'twilio-ruby'
-
-puts "--------------------"
-puts ENV['NO_OF_TIMES']
-puts "--------------------"
 
 # Setting chrome for heroku
 Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
 Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
 # Select the browser
-browser       = Watir::Browser.new :chrome, headless: true
+browser       = Watir::Browser.new :chrome
 twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCT'], ENV['TWILIO_TOKEN']
 
 # Open the URL
