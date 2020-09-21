@@ -12,7 +12,7 @@ Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
 Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
 # Select the browser
-browser       = Watir::Browser.new :chrome
+browser       = Watir::Browser.new :chrome, headless: true
 twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCT'], ENV['TWILIO_TOKEN']
 
 # Open the URL
