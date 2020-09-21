@@ -3,7 +3,7 @@ require 'twilio-ruby'
 
 begin
   # Setting chrome for heroku
-  Selenium::WebDriver::Chrome.path                 = "/app/.apt/usr/bin/google-chrome"
+  Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
   Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
   # Select the browser
@@ -43,6 +43,10 @@ begin
   end
 
   browser.close
-rescue Exception
+rescue Exception => error
+  puts "--------ERROR-------"
+  puts error
+  puts "--------------------"
+
   twilio_client.messages.create(from: ENV['FROM_PHONE'], to: ENV['DEBUG_TO_PHONE'], body: 'USA Slot check ERROR!')
 end
