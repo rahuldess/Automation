@@ -1,12 +1,13 @@
 require 'watir'
 require 'twilio-ruby'
+require 'webdrivers/chromedriver'
 
 puts "--------------------"
 puts ENV['NO_OF_TIMES']
 puts "--------------------"
 
 # Select the browser
-browser       = Watir::Browser.new :chrome, headless: true
+browser       = Watir::Browser.new :chrome
 twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCT'], ENV['TWILIO_TOKEN']
 
 # Open the URL
