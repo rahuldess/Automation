@@ -1,15 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'bundler/inline'
-
-gemfile do
-  source 'https://rubygems.org'
-  gem "watir"
-  gem 'twilio-ruby'
-end
-
-puts 'Gems installed and loaded!'
-
 # Select the browser
 browser       = Watir::Browser.new :chrome
 twilio_client = Twilio::REST::Client.new ENV['TWILIO_ACCT'], ENV['TWILIO_TOKEN']
