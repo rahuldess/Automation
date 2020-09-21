@@ -1,4 +1,5 @@
-#!/usr/bin/env ruby
+require 'watir'
+require 'twilio-ruby'
 
 # Select the browser
 browser       = Watir::Browser.new :chrome
