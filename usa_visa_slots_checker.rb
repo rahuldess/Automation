@@ -1,4 +1,6 @@
+puts "-1-------------------"
 require 'watir'
+puts "-2-------------------"
 require 'twilio-ruby'
 
 puts "--------------------"
