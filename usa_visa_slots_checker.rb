@@ -1,6 +1,6 @@
 require 'watir'
+require 'webdrivers'
 require 'twilio-ruby'
-require 'webdrivers/chromedriver'
 
 puts "--------------------"
 puts ENV['NO_OF_TIMES']
