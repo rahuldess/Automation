@@ -50,5 +50,5 @@ rescue Exception => error
   puts error
   puts "--------------------"
 
-  twilio_client.messages.create(from: ENV['FROM_PHONE'], to: ENV['DEBUG_TO_PHONE'], body: 'USA Slot check ERROR!')
+  #twilio_client.messages.create(from: ENV['FROM_PHONE'], to: ENV['DEBUG_TO_PHONE'], body: 'USA Slot check ERROR!')
 end
