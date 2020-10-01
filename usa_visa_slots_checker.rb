@@ -45,11 +45,14 @@ begin
   # Clicking the location dropdown
   # NOTES: Switching between different cities just to trigger ajax call to fetch slots
   browser.select_list(id: "appointments_consulate_appointment_facility_id").option(text: 'Vancouver').select
+  sleep 1
   browser.select_list(id: "appointments_consulate_appointment_facility_id").option(text: 'Calgary').select
+  sleep 1
   browser.select_list(id: "appointments_consulate_appointment_facility_id").option(text: 'Vancouver').select
+  sleep 3
 
   # Click on 'Date of Appointment field'
-  browser.input(id: "appointments_consulate_appointment_date").when_present.click
+  browser.input(id: "appointments_consulate_appointment_date").click
 
   10.times do
     available_slots = browser.execute_script('return $("table.ui-datepicker-calendar > tbody > tr > :not(td.ui-datepicker-unselectable)")')
