@@ -64,7 +64,7 @@ begin
       first_available_year  = slot.attr('data-year').value.to_i
       first_available_date  = slot.children.children.text.to_i
 
-      return if first_available_year > current_slot_year && first_available_month > current_slot_month && first_available_date > current_slot_date
+      return if first_available_year > current_slot_year || first_available_month > current_slot_month || first_available_date > current_slot_date
 
       # Select the first slot available
       # Select the first time slot available
