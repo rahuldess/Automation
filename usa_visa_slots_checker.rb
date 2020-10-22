@@ -13,9 +13,9 @@ current_slot_year  = ENV['CURRENT_SLOT_YEAR'].to_i
 current_slot_date  = ENV['CURRENT_SLOT_DATE'].to_i
 current_slot_month = ENV['CURRENT_SLOT_MONTH'].to_i
 
-from_phone         = ENV['FROM_PHONE']
-to_phone           = ENV['TO_PHONE']
-debug_to_phone     = ENV['DEBUG_TO_PHONE']
+from_phone       = ENV['FROM_PHONE']
+to_phone         = ENV['TO_PHONE']
+debug_to_phone   = ENV['DEBUG_TO_PHONE']
 
 begin
   # Setting chrome for heroku
@@ -67,18 +67,28 @@ begin
       first_available_year  = slot.attr('data-year').value.to_i
       first_available_date  = slot.children.children.text.to_i
 
-      return if first_available_year > current_slot_year || first_available_month > current_slot_month || first_available_date > current_slot_date
-
       # Select the first slot available
       # Select the first time slot available
       # Confirm re-schedule 
-      first_slot.click
-      browser.select_list(id: "appointments_consulate_appointment_time").option(index: 1).select
-      browser.input(id: "appointments_submit").click
+      book = -> do
+        first_slot.click
+        browser.select_list(id: "appointments_consulate_appointment_time").option(index: 1).select
+        browser.input(id: "appointments_submit").click
+        browser.link(xpath: '/html/body/div[6]/div/div/a[2]').click
 
-      # Send message to notify the user
-      twilio_client.messages.create(from: from_phone, to: to_phone, body: "Slot Booked. Please check!")
-      return
+        # Send message to notify the user
+        twilio_client.messages.create(from: from_phone, to: to_phone, body: "Slot Booked. Please check!")
+      end
+
+      if first_available_year < current_slot_year
+        book.call
+      elsif first_available_year == current_slot_year && first_available_month < current_slot_month
+        book.call
+      elsif first_available_year == current_slot_year && first_available_month == current_slot_month && first_available_date < current_slot_date
+        book.call
+      else
+        return
+      end
     else
       # Click on next button to check for next months
       browser.link(xpath: '//*[@id="ui-datepicker-div"]/div[2]/div/a').click
