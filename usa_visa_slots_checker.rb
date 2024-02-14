@@ -74,18 +74,27 @@ begin
   # Click on 'Date of Appointment field'
   browser.input(id: "appointments_consulate_appointment_date").click
 
+  # Check for any available slots
   10.times do
     available_slots = browser.execute_script('return $("table.ui-datepicker-calendar > tbody > tr > :not(td.ui-datepicker-unselectable)")')
 
+    puts "Available slots #{available_slots.length}"
+
     if available_slots.length > 0
+      # If any slot found
       first_slot      = available_slots.first
       first_slot_html = first_slot.html 
 
       slot = Nokogiri::HTML.parse(first_slot_html).root.children.children
 
+      # Fetch the date, month & year of the found slot
       first_available_month = slot.attr('data-month').value.to_i
       first_available_year  = slot.attr('data-year').value.to_i
       first_available_date  = slot.children.children.text.to_i
+
+      puts "First Available Month: #{first_available_month}"
+      puts "First Available Year: #{first_available_year}"
+      puts "First Available Date: #{first_available_date}"
 
       # Select the first slot available
       # Select the first time slot available
@@ -100,6 +109,8 @@ begin
         twilio_client.messages.create(from: from_phone, to: to_phone, body: "Slot Booked. Please check!")
       end
 
+      # Book only if any of below conditions meet
+      # If a slot is NOT found, Keep checking for next days
       if first_available_year < current_slot_year
         book.call
       elsif first_available_year == current_slot_year && first_available_month < current_slot_month
@@ -110,6 +121,8 @@ begin
         return
       end
     else
+      puts "Checking next months"
+
       # Click on next button to check for next months
       browser.link(xpath: '//*[@id="ui-datepicker-div"]/div[2]/div/a').click
     end
