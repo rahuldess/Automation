@@ -2,6 +2,7 @@ require 'watir'
 require 'twilio-ruby'
 require 'byebug'
 require 'nokogiri'
+require 'capybara'
 
 twilio_account     = ENV['TWILIO_ACCT']
 twilio_token       = ENV['TWILIO_TOKEN']
