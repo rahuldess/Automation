@@ -19,11 +19,12 @@ debug_to_phone   = ENV['DEBUG_TO_PHONE']
 
 begin
   # Setting chrome for heroku
-  Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
+  # Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
   # Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
   # Select the browser
-  browser       = Watir::Browser.new :chrome
+  #browser      = Watir::Browser.new :chrome
+  browser       = Watir::Browser.new :chrome, args: %w[--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9222]
   twilio_client = Twilio::REST::Client.new twilio_account, twilio_token 
 
   # Open the URL
