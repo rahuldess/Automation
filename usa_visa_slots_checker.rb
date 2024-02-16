@@ -19,8 +19,8 @@ debug_to_phone   = ENV['DEBUG_TO_PHONE']
 
 begin
   # Setting chrome for heroku
-  #Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
-  #Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
+  Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
+  # Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
   # Select the browser
   browser       = Watir::Browser.new :chrome
