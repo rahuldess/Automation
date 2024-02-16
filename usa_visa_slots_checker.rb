@@ -2,7 +2,6 @@ require 'watir'
 require 'twilio-ruby'
 require 'byebug'
 require 'nokogiri'
-require 'capybara'
 
 twilio_account     = ENV['TWILIO_ACCT']
 twilio_token       = ENV['TWILIO_TOKEN']
@@ -20,27 +19,8 @@ debug_to_phone   = ENV['DEBUG_TO_PHONE']
 
 begin
   # Setting chrome for heroku
-  #Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
-  #Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
-  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
-
-  chrome_opts = chrome_bin ? { "chromeOptions" => { "binary" => chrome_bin } } : {}
-
-  opts = Selenium::WebDriver::Chrome::Options.new
-
-  chrome_args = %w[--headless --no-sandbox --disable-gpu]
-  chrome_args.each { |arg| opts.add_argument(arg)  }
-
-  Capybara.register_driver :headless do |app|
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      options: opts,
-      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(chrome_opts)
-    )
-  end
-
-  Capybara.javascript_driver = :headless
+  Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
+  Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
   # Select the browser
   browser       = Watir::Browser.new :chrome
