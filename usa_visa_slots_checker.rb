@@ -18,10 +18,11 @@ to_phone         = ENV['TO_PHONE']
 debug_to_phone   = ENV['DEBUG_TO_PHONE']
 
 begin
-  # Setting chrome for heroku
+  # Setting chrome for heroku ( OLD CONFIG )
   # Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
   # Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
+  # NEW Config
   chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
   chrome_opts = chrome_bin ? { binary: chrome_bin } : {}
 
@@ -61,6 +62,7 @@ begin
   10.times do
     available_slots = browser.execute_script('return $("table.ui-datepicker-calendar > tbody > tr > :not(td.ui-datepicker-unselectable)")')
 
+    byebug
     puts "Available slots #{available_slots.length}"
 
     if available_slots.length > 0
