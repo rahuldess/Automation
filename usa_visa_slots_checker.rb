@@ -22,9 +22,11 @@ begin
   # Selenium::WebDriver::Chrome.path        = "/app/.apt/usr/bin/google-chrome"
   # Selenium::WebDriver::Chrome.driver_path = "/app/.chromedriver/bin/chromedriver"
 
+  chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+  chrome_opts = chrome_bin ? { binary: chrome_bin } : {}
+
   # Select the browser
-  browser      = Watir::Browser.new :chrome
-  # browser    = Watir::Browser.new :chrome, args: %w[--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-debugging-port=9222]
+  browser       = Watir::Browser.new :chrome, options: chrome_opts
   twilio_client = Twilio::REST::Client.new twilio_account, twilio_token 
 
   # Open the URL
