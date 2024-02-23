@@ -62,7 +62,6 @@ begin
   10.times do
     available_slots = browser.execute_script('return $("table.ui-datepicker-calendar > tbody > tr > :not(td.ui-datepicker-unselectable)")')
 
-    byebug
     puts "Available slots #{available_slots.length}"
 
     if available_slots.length > 0
